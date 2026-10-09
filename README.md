@@ -127,3 +127,29 @@ Track: Future of Work & Automation
 Repository: https://github.com/EDDY05ee/FieldExtract-AI
 
 Demo video and live-demo links will be added when available.
+
+
+System Architecture
+
+The following diagram represents the current FieldExtract AI prototype implementation.
+
+flowchart TD
+    A["Invoice PDF or Image"] --> B["Streamlit Upload"]
+    B --> C{"Document Type"}
+    C -->|PDF| D["PyMuPDF Text Extraction"]
+    C -->|Image or OCR Fallback| E["Tesseract OCR"]
+    D --> F["Rule-Based Field Extraction"]
+    E --> F
+    F --> G["Source Evidence and Rule-Based Confidence"]
+    G --> H["Human Review and Editing"]
+    H --> I["Financial Total Validation"]
+    I --> J["Human Verification and Approval"]
+    J --> K["CSV / JSON / Excel Export"]
+
+Architecture notes
+
+- Streamlit provides the user interface and workflow.
+- PyMuPDF extracts text from PDFs; Tesseract OCR handles image-based text extraction.
+- Rule-based logic identifies invoice fields and estimates confidence.
+- Human review and approval help users check extracted values before export.
+- CSV, JSON, and Excel are the supported export formats.
